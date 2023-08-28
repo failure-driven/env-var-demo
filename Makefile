@@ -21,9 +21,18 @@ build:
 
 .PHONY: demo
 demo:
+	@echo "\n\tPassword is always ${RED}password${NC}\n"
 	@echo "${RED}TODO:${NC} rails credentials demo"
 	@echo "${RED}TODO:${NC} SOPS demo"
-	@echo "${RED}TODO:${NC} Ansible vault demo"
+	@echo "${GREEN}Ansible vault${NC} demo, run:"
+	@echo "\t${YELLOW}bin/secrets-init prod${NC}"
+	@echo "\t${YELLOW}bin/secrets-edit prod${NC}"
+	@echo "\t${GREEN}source bin/secrets-load prod${NC}"
+	@echo "\tprintenv | ag ANSIBLE"
+	@echo
+	@echo "\t\tANSIBLE_VAULT_ENCRYPTED_ENV=the-ansbile-encrypted-env"
+	@echo "\t\tANSIBLE_VAULT_VISIBLE_ENV=the-ansible-visible-env"
+	@echo
 	@echo "${RED}TODO:${NC} EJSON demo"
 
 .PHONY: run
