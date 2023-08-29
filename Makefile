@@ -19,21 +19,62 @@ install:
 build:
 	echo "build step goes here"
 
-.PHONY: demo
-demo:
-	@echo "\n\tPassword is always ${RED}password${NC}\n"
+.PHONY: demo-rails-credentials
+demo-rails-credentials:
 	@echo "${RED}TODO:${NC} rails credentials demo"
+	@echo
+
+.PHONY: demo-sops
+demo-sops:
 	@echo "${RED}TODO:${NC} SOPS demo"
-	@echo "${GREEN}Ansible vault${NC} demo, run:"
-	@echo "\t${YELLOW}bin/secrets-init prod${NC}"
-	@echo "\t${YELLOW}bin/secrets-edit prod${NC}"
-	@echo "\t${GREEN}source bin/secrets-load prod${NC}"
-	@echo "\tprintenv | ag ANSIBLE"
 	@echo
-	@echo "\t\tANSIBLE_VAULT_ENCRYPTED_ENV=the-ansbile-encrypted-env"
-	@echo "\t\tANSIBLE_VAULT_VISIBLE_ENV=the-ansible-visible-env"
+
+.PHONY: demo-ansible-vault
+demo-ansible-vault:
+	@echo "${GREEN}Ansible vault${NC} demo, run:\n" \
+		"\t${YELLOW}bin/secrets-init prod${NC}\n" \
+		"\t${YELLOW}bin/secrets-edit prod${NC}\n" \
+		"\tpassword is: ${RED}password${NC}\n" \
+		"\t${GREEN}source bin/secrets-load prod${NC}\n" \
+		"\tset | ag ANSIBLE\n" \
+		"\n" \
+		"\t\tANSIBLE_VAULT_ENCRYPTED_ENV=the-ansbile-encrypted-env\n" \
+		"\t\tANSIBLE_VAULT_VISIBLE_ENV=the-ansible-visible-env"
 	@echo
-	@echo "${RED}TODO:${NC} EJSON demo"
+
+.PHONY: demo-ejson
+demo-ejson:
+	@echo "${GREEN}EJSON${NC} demo\n" \
+		"\t# place the keys somewhere like /opt/ejson/keys\n" \
+		"\tmkdir -p env/ejson_keydir\n" \
+		"\tejson -keydir env/ejson_keydir keygen -w\n" \
+		"\t    7baa8909...\n" \
+		"\tcat <<EOF > env/prod.ejson\n" \
+		"\t{\n" \
+		"\t    \"_public_key\": \"7baa89...\",\n" \
+		"\t    \"environment\": {\n" \
+		"\t        \"_EJSON_VISIBLE\": \"EJSON visible key\",\n" \
+		"\t        \"EJSON_ENCRPYTED\": \"EJSON encrypted key\"\n" \
+		"\t    }\n" \
+		"\t}\n" \
+		"\tEOF\n" \
+		"\tejson encrypt env/prod.ejson\n" \
+		"\tOR for this demo\n" \
+		"\tejson ${YELLOW}-keydir env/ejson_keydir${NC} encrypt env/prod.ejson\n" \
+		"\t${GREEN}ejson -keydir env/ejson_keydir decrypt env/prod.ejson${NC}\n" \
+		"\t{\n" \
+		"\t    \"_public_key\": \"7baa89...\",\n" \
+		"\t    \"_ejson_visible\": \"EJSON visible key\",\n" \
+		"\t    \"ejson_encrpyted\": \"EJSON encrypted key\"\n" \
+		"\t}\n" \
+		"\t${GREEN}eval \$$(ejson2env ${YELLOW}-keydir env/ejson_keydir${GREEN} env/prod.ejson)${NC}\n" \
+		"\t${GREEN}set | ag EJSON${NC}\n\n" \
+		"\t\tEJSON_ENCRPYTED='EJSON encrypted key'\n" \
+		"\t\t_EJSON_VISIBLE='EJSON visible key'\n"
+	@echo
+
+.PHONY: demo
+demo: demo-rails-credentials demo-sops demo-ansible-vault demo-ejson
 
 .PHONY: run
 run:
@@ -51,6 +92,10 @@ usage:
 	@echo "${YELLOW}make build${NC}        build the project"
 	@echo
 	@echo "${YELLOW}make demo${NC}         demo all the things"
+	@echo "${YELLOW}make demo-rails-credentials${NC}"
+	@echo "${YELLOW}make demo-sops${NC}"
+	@echo "${YELLOW}make demo-ansible-vault${NC}"
+	@echo "${YELLOW}make demo-ejson${NC}"
 	@echo
 	@echo "Development"
 	@echo
