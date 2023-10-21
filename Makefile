@@ -81,6 +81,15 @@ run:
 	bin/setup
 	bin/rails server
 
+.PHONY: clean
+clean:
+	@echo "\
+	run the following:\n\
+	${GREEN}unset EJSON_ENCRPYTED \\\ \n \
+		_EJSON_VISIBLE \\\ \n \
+		ANSIBLE_VAULT_ENCRYPTED_ENV \\\ \n \
+		ANSIBLE_VAULT_VISIBLE_ENV${NC}"
+
 .PHONY: usage
 usage:
 	@echo
