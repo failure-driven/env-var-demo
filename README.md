@@ -8,6 +8,14 @@
 
 ## Demo
 
+### Env Vars
+
+TODO: using `.env.production` and `.env.development` and overwriting with `.env.local`
+
+what is the problem?
+- 12 factor app - https://12factor.net/
+- unencrypted at rest
+
 ### Rails Credentials
 
 ```sh
@@ -72,6 +80,71 @@ set | ag EJSON
   EJSON_ENCRPYTED='EJSON encrypted key'
   _EJSON_VISIBLE='EJSON visible key'
 ```
+
+### 1Password bootstrapping
+
+you can bootstrap your app with a fetch from 1Password with something along the
+lines of:
+
+```sh
+brew install op     # https://developer.1password.com/docs/cli
+op vault list | grep --quiet YourOrganisation && \
+    echo "signed in to ${GREEN}1password!${NC}" || \
+    { echo "need to be signed into ${YELLOW}1password${NC} with \
+    ${RED}eval \$$(op signin)${NC}"; exit
+    op read op://YourOrganisation/your-secret/notes \
+    > ./.env.local
+    # OR config/master.key
+    # OR env/ejson_keydir/<KEY_ID>
+```
+
+Other 1password, `op` commands
+
+```
+# take a look at your 1password config
+cat ~/.config/op/config
+{
+	"latest_signin": "organisation_name",
+	"device": "0123456789abcdefghijklmnop",
+	"accounts": [
+		{
+			"shorthand": "organisation_name",
+			"accountUUID": "0123456789ABCDEFGHIJKLMNOP",
+			"url": "https://organisation_name.1password.com",
+			"email": "michael.milewski@organisation.name.com",
+			"accountKey": "AB-CDEFGH-IJKLMN-OPQRS-TUVWX-YZ012-34567",
+			"userUUID": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		}
+	]
+}
+
+# list accounts
+op accounts list
+SHORTHAND   org_name
+URL         https://org_name.1password.com
+EMAIL       michael.milewski@org.com.au
+USER ID     ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+# add account
+op accounts add
+Enter your sign-in address (example.1password.com): ^C
+
+# signin and signout
+op signin
+op signout
+```
+
+### Managing Env Vars in ruby with AnywayConfig
+
+TODO: add anywayconfig example
+- as per https://evilmartians.com/chronicles/anyway-config-keep-your-ruby-configuration-sane
+- using https://github.com/palkan/anyway_config
+
+### Deploying Kubernetes with injected Env Vars
+
+TODO: using
+- based on https://thenewstack.io/managing-kubernetes-secrets-with-aws-secrets-manager/
+- using https://github.com/external-secrets/external-secrets
 
 ## Original Rails README
 
