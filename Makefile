@@ -19,6 +19,20 @@ install:
 build:
 	echo "build step goes here"
 
+.env.local:
+	@echo "DOT_ENV_OVERWRITTEN_VISIBLE=\"DotEnv overwritten visible key set in .env.local\"\n"\
+		"DOT_ENV_OVERWRITTEN_SECRET=\"DotEnv overwritten secret key set in .env.local\"" > \
+		.env.local
+
+.PHONY: demo-dotenv
+demo-dotenv:
+	@echo "${GREEN}DotEnv${NC} demo, run:\n" \
+		"\t${YELLOW}cat .env${NC}\n" \
+		"\t${YELLOW}cat .env.development${NC}\n" \
+		"\t${YELLOW}make .env.local${NC}\n" \
+		"\t${YELLOW}cat .env.local${NC}\n" \
+		"\t${YELLOW}bin/rails restart${NC}\n"
+
 .PHONY: demo-rails-credentials
 demo-rails-credentials:
 	@echo "${RED}TODO:${NC} rails credentials demo"
@@ -74,7 +88,7 @@ demo-ejson:
 	@echo
 
 .PHONY: demo
-demo: demo-rails-credentials demo-sops demo-ansible-vault demo-ejson
+demo: demo-dotenv demo-rails-credentials demo-sops demo-ansible-vault demo-ejson
 
 .PHONY: run
 run:
@@ -83,6 +97,7 @@ run:
 
 .PHONY: clean
 clean:
+	@rm .env.local
 	@echo "\
 	run the following:\n\
 	${GREEN}unset EJSON_ENCRPYTED \\\ \n \
@@ -101,6 +116,7 @@ usage:
 	@echo "${YELLOW}make build${NC}        build the project"
 	@echo
 	@echo "${YELLOW}make demo${NC}         demo all the things"
+	@echo "${YELLOW}make demo-dotenv${NC}"
 	@echo "${YELLOW}make demo-rails-credentials${NC}"
 	@echo "${YELLOW}make demo-sops${NC}"
 	@echo "${YELLOW}make demo-ansible-vault${NC}"

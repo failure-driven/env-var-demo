@@ -10,11 +10,34 @@
 
 ### Env Vars
 
-TODO: using `.env.production` and `.env.development` and overwriting with `.env.local`
-
 what is the problem?
 - 12 factor app - https://12factor.net/
 - unencrypted at rest
+
+### Dot Env
+
+```sh
+bundle add dotenv-rails
+```
+
+a hierarcy of .env* files as described in
+https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
+
+| Hierarchy Priority | Filename                 | Environment          | Should I `.gitignore`it? | Notes                                                        |
+| ------------------ | ------------------------ | -------------------- | ------------------------ | ------------------------------------------------------------ |
+| 1st (highest)      | `.env.development.local` | Development          | Yes!                     | Local overrides of environment-specific settings.            |
+| 1st                | `.env.test.local`        | Test                 | Yes!                     | Local overrides of environment-specific settings.            |
+| 1st                | `.env.production.local`  | Production           | Yes!                     | Local overrides of environment-specific settings.            |
+| 2nd                | `.env.local`             | Wherever the file is | Definitely.              | Local overrides. This file is loaded for all environments _except_ `test`. |
+| 3rd                | `.env.development`       | Development          | No.                      | Shared environment-specific settings                         |
+| 3rd                | `.env.test`              | Test                 | No.                      | Shared environment-specific settings                         |
+| 3rd                | `.env.production`        | Production           | No.                      | Shared environment-specific settings                         |
+| Last               | `.env`                   | All Environments     | Depends                  | The Original®                                                |
+
+```sh
+make demo-dotenv
+make .env.local
+```
 
 ### Rails Credentials
 

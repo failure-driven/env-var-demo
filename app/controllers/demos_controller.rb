@@ -6,6 +6,10 @@ class DemosController < ApplicationController
       _EJSON_VISIBLE
       ANSIBLE_VAULT_ENCRYPTED_ENV
       ANSIBLE_VAULT_VISIBLE_ENV
+      DOT_ENV_VISIBLE
+      DOT_ENV_SECRET
+      DOT_ENV_OVERWRITTEN_VISIBLE
+      DOT_ENV_OVERWRITTEN_SECRET
     ].each do |env_var_key|
       @env_vars[env_var_key] = ENV.fetch(env_var_key, nil)
     end
