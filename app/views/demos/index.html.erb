@@ -1,0 +1,29 @@
+<h1>ENV VARS</h1>
+
+<% @env_vars.each do |key, value| %>
+  <div style="display: flex; padding-bottom: 1em;">
+    <div style="flex: 1;">
+      <strong><%= key %></strong>
+    </div>
+    <div style="flex: 1; padding-left: 1em;">
+      <%= value %>
+    </div>
+  </div>
+<% end %>
+
+<h2>Files at rest</h2>
+<ul>
+  <% %w[
+    config/credentials.yml.enc
+    config/master.key
+    env/prod/env.secrets
+    env/prod.ejson
+    env/ejson_keydir/7baa8909f86cc0e5615fdaec4262ca050b48a0e55b0416931f19d4924ff54428
+  ].each do |filename| %>
+    <li style="padding-bottom: 1em;">
+      <%= link_to read_file_demos_path(filename: filename) do %>
+        <%= filename %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
