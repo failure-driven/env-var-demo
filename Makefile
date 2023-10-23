@@ -91,6 +91,17 @@ demo-ejson:
 		"\t\t_EJSON_VISIBLE='EJSON visible key'\n"
 	@echo
 
+.PHONY: demo-tmux
+demo-tmux:
+	tmux -L "demo" new-session -d
+	tmux -L "demo" new-window -d -n 1 -t "0:1"
+	tmux -L "demo" send-keys -t "0:1" "set | ag ENV" Enter
+	tmux -L "demo" new-window -d -n 2 -t "0:2"
+	tmux -L "demo" send-keys -t "0:2" "set | ag ENV" Enter
+	tmux -L "demo" new-window -d -n 3 -t "0:3"
+	tmux -L "demo" send-keys -t "0:3" "set | ag ENV" Enter
+	tmux -L "demo" -CC attach-session
+
 .PHONY: demo
 demo: demo-dotenv demo-rails-credentials demo-sops demo-ansible-vault demo-ejson
 
@@ -99,8 +110,12 @@ run:
 	bin/setup
 	bin/rails server
 
+.PHONY: tmux-down
+tmux-down:
+	tmux -L "demo" kill-session
+
 .PHONY: clean
-clean:
+clean: tmux-down
 	@rm .env.local
 	@echo "\
 	run the following:\n\

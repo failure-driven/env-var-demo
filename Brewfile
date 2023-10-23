@@ -21,3 +21,7 @@ brew "slides"           # Terminal based presentation tool
 brew "tree"             # Display directories as trees (with optional
                         # color/HTML output)
                         # http://mama.indstate.edu/users/ice/tree/
+
+# TMUX
+brew "tmux"             # Terminal multiplexer https://tmux.github.io/
+
