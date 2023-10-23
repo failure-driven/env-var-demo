@@ -19,6 +19,10 @@ install:
 build:
 	echo "build step goes here"
 
+.PHONY: slides
+slides:
+	@slides PRESENTATION.md
+
 .env.local:
 	@echo "DOT_ENV_OVERWRITTEN_VISIBLE=\"DotEnv overwritten visible key set in .env.local\"\n"\
 		"DOT_ENV_OVERWRITTEN_SECRET=\"DotEnv overwritten secret key set in .env.local\"" > \
@@ -114,6 +118,8 @@ usage:
 	@echo
 	@echo "${YELLOW}make install${NC}      install"
 	@echo "${YELLOW}make build${NC}        build the project"
+	@echo
+	@echo "${YELLOW}make slides${NC}       show slideshow"
 	@echo
 	@echo "${YELLOW}make demo${NC}         demo all the things"
 	@echo "${YELLOW}make demo-dotenv${NC}"

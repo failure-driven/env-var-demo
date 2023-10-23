@@ -6,6 +6,14 @@
 1. .env
 1. EJson
 
+## Presentation
+
+```
+make
+make install
+make slides
+```
+
 ## Demo
 
 ### Env Vars
