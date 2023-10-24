@@ -49,8 +49,17 @@ make .env.local
 
 ### Rails Credentials
 
+no key
+
 ```sh
-TODO: rails credentials demo
+cat config/master.key
+```
+
+```sh
+make demo-rails-credentials
+
+# and now a key via 1password
+cat config/master.key
 ```
 
 ### SOPS

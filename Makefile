@@ -41,9 +41,19 @@ demo-dotenv:
 		"\t${YELLOW}cat .env.local${NC}\n" \
 		"\t${YELLOW}bin/rails restart${NC}\n"
 
+config/master.key:
+	@op vault list | grep --quiet Mable && echo "signed in to ${GREEN}1password!${NC}" || \
+		{ echo "need to be signed into ${YELLOW}1password${NC} with ${RED}eval \$$(op signin)${NC}"; \
+		  echo "or just wack this in"; \
+		  echo "${YELLOW}echo '0123456789abcdef0123456789abcdef' > config/master.key${NC}"; exit 1; }
+	@echo "reading from 1password ${GREEN}op://Private/env_var_master_key/notes${NC}"
+	@op read op://Private/env_var_master_key/notes \
+		> ./config/master.key
+
 .PHONY: demo-rails-credentials
-demo-rails-credentials:
-	@echo "${RED}TODO:${NC} rails credentials demo"
+demo-rails-credentials: config/master.key
+	cat config/master.key
+	bin/rails runner 'puts Rails.application.credentials.demo.to_json' | jq
 	@echo
 
 .PHONY: demo-sops

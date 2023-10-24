@@ -1,5 +1,6 @@
 <h1>ENV VARS</h1>
 
+<h2>Rails Credentials</h1>
 <code>
   <%= @rails_credentials
     .gsub(" ", "&nbsp;")
@@ -7,6 +8,7 @@
   %>
 </code>
 
+<h2>Env Vars</h1>
 <% @env_vars.each do |key, value| %>
   <div style="display: flex; padding-bottom: 1em;">
     <div style="flex: 1;">
