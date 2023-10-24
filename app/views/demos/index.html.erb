@@ -1,5 +1,12 @@
 <h1>ENV VARS</h1>
 
+<code>
+  <%= @rails_credentials
+    .gsub(" ", "&nbsp;")
+    .gsub("\n", "<br />").html_safe
+  %>
+</code>
+
 <% @env_vars.each do |key, value| %>
   <div style="display: flex; padding-bottom: 1em;">
     <div style="flex: 1;">
@@ -17,8 +24,8 @@
     .env
     .env.development
     .env.local
-    config/credentials.yml.enc
     config/master.key
+    config/credentials.yml.enc
     env/prod/env.secrets
     env/prod.ejson
     env/ejson_keydir/7baa8909f86cc0e5615fdaec4262ca050b48a0e55b0416931f19d4924ff54428

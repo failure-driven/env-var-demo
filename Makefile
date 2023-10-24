@@ -117,7 +117,7 @@ run:
 
 .PHONY: tmux-down
 tmux-down:
-	tmux -L "demo" kill-session
+	tmux -L "demo" kill-session || echo "no tmux running 🎉"
 
 .PHONY: clean
 clean: tmux-down

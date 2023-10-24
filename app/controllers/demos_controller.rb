@@ -1,5 +1,8 @@
 class DemosController < ApplicationController
   def index
+    @rails_credentials = JSON.pretty_generate(
+      Rails.application.credentials.demo
+    )
     @env_vars = {}
     %w[
       EJSON_ENCRPYTED
