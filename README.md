@@ -176,9 +176,26 @@ op signout
 
 ### Managing Env Vars in ruby with AnywayConfig
 
-TODO: add anywayconfig example
+AnywayConfig GEM
 - as per https://evilmartians.com/chronicles/anyway-config-keep-your-ruby-configuration-sane
 - using https://github.com/palkan/anyway_config
+
+```sh
+bin/rails r 'puts AnsibleVaultDemoConfig.new.to_h.to_json' | jq
+
+    {
+      "visible_env": "the-ansible-visible-env",
+      "encrypted_env": "the-ansbile-encrypted-env"
+    }
+
+ANSIBLE_VAULT_VISIBLE_ENV="THE OVERRIDE" \
+    bin/rails r 'puts AnsibleVaultDemoConfig.new.to_h.to_json' | jq
+
+    {
+      "visible_env": "THE OVERRIDE",
+      "encrypted_env": "the-ansbile-encrypted-env"
+    }
+```
 
 ### Deploying Kubernetes with injected Env Vars
 

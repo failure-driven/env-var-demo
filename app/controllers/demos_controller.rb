@@ -16,6 +16,13 @@ class DemosController < ApplicationController
     ].each do |env_var_key|
       @env_vars[env_var_key] = ENV.fetch(env_var_key, nil)
     end
+    @anyway_configs = JSON.pretty_generate(
+      [
+
+        DotEnvDemoConfig.env_prefix => DotEnvDemoConfig.new.to_h,
+        AnsibleVaultDemoConfig.env_prefix => AnsibleVaultDemoConfig.new.to_h,
+      ]
+    )
   end
 
   def read_file

@@ -30,3 +30,6 @@
 
 # ignore local env files
 .env.*local
+
+/config/*.local.yml
+/config/credentials/local.*

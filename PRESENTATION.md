@@ -347,6 +347,13 @@ API_SECRET='the-real-secret-🔐'
 
 ---
 
+# Next
+
+- AnywayConfig and EJson
+- AnywayConfig and Rails Credentials
+
+---
+
 # Summary
 
 - learn how things work

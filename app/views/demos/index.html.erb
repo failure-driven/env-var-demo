@@ -39,3 +39,12 @@
     </li>
   <% end %>
 </ul>
+
+<h2>Via AnywayConfig</h2
+<code>
+  <%= @anyway_configs
+    .gsub(" ", "&nbsp;")
+    .gsub("\n", "<br />").html_safe
+  %>
+</code>
+
