@@ -21,6 +21,12 @@ brew "slides"           # Terminal based presentation tool
 brew "tree"             # Display directories as trees (with optional
                         # color/HTML output)
                         # http://mama.indstate.edu/users/ice/tree/
+# Obsidian for Markdown and better slides
+cask "obsidian"         # https://obsidian.md/
+# just cat the image
+brew "eddieantonio/eddieantonio/imgcat"
+                        # It's like cat(1), but for images.
+                        # https://github.com/eddieantonio/imgcat
 
 # TMUX
 brew "tmux"             # Terminal multiplexer https://tmux.github.io/

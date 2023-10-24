@@ -23,6 +23,10 @@ build:
 slides:
 	@slides PRESENTATION.md
 
+.PHONY: slides-img
+slides-img:
+	imgcat images/env-var-qr.png
+
 .env.local:
 	@echo "DOT_ENV_OVERWRITTEN_VISIBLE=\"DotEnv overwritten visible key set in .env.local\"\n"\
 		"DOT_ENV_OVERWRITTEN_SECRET=\"DotEnv overwritten secret key set in .env.local\"" > \

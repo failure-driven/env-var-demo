@@ -20,7 +20,9 @@ rails new 🎉
 
 # Life is good 🌴
 
-🛤️ 💎 ⛏️
+💎   ⛏️ 
+
+🛤️
 
 ---
 
@@ -117,7 +119,7 @@ _you haven't seen this presentation so ..._
 
 ---
 
-## You have some secrets 🔐
+# You have some secrets 🔐
 
 * **AWS SECRET** for S3
 * **DB PASSWORD** for reporting DB
@@ -172,7 +174,7 @@ _you haven't seen this presentation so ..._
 
 ---
 
-## You read about 12 factor Apps
+# You read about 12 factor Apps
 - https://12factor.net/
   > III. Config
   > Store config in the environment
@@ -245,7 +247,7 @@ request.headers['API-Key'] = Rails.application.config.api_secret
 
 ---
 
-## DevOps moves production secrets to Env Vars
+# DevOps moves production secrets to Env Vars
 
 tree config/environments
 ```sh
@@ -351,7 +353,7 @@ API_SECRET='the-real-secret-🔐'
 - be willing to question things
 - don't store unencrypted secrets on disk
 - working demo at
-![](images/env-var-qr.png)
+![QR to code](images/env-var-qr.png)
 also mentioned
 - rails credentials
 - SOPS
