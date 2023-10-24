@@ -1,1 +1,1 @@
-ANSIBLE_VAULT_VISIBLE_ENV=the-ansible-visible-env
+export ANSIBLE_VAULT_VISIBLE_ENV=the-ansible-visible-env

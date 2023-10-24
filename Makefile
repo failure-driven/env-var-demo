@@ -94,6 +94,7 @@ demo-ejson:
 .PHONY: demo-tmux
 demo-tmux:
 	tmux -L "demo" new-session -d
+	tmux -L "demo" send-keys -t 0 "set | ag ENV" Enter
 	tmux -L "demo" new-window -d -n 1 -t "0:1"
 	tmux -L "demo" send-keys -t "0:1" "set | ag ENV" Enter
 	tmux -L "demo" new-window -d -n 2 -t "0:2"
