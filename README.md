@@ -202,6 +202,8 @@ ANSIBLE_VAULT_VISIBLE_ENV="THE OVERRIDE" \
 TODO: using
 - based on https://thenewstack.io/managing-kubernetes-secrets-with-aws-secrets-manager/
 - using https://github.com/external-secrets/external-secrets
+- https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+- vs on file disk with https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html
 
 ## Original Rails README
 
