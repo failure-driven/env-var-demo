@@ -29,7 +29,9 @@ rails new 🎉
 # You have some magic values
 
 ```ruby
-# TODO code sample
+def make_it_pretty
+  42.times { puts "❤️" }
+end
 ```
 
 ---
@@ -37,7 +39,11 @@ rails new 🎉
 # You move them out into CONSTANTS
 
 ```ruby
-# TODO code sample
+THE_ANSWER_TO_EVERYTHING = 42
+
+def make_it_pretty
+  THE_ANSWER_TO_EVERYTHING.times { puts "❤️" }
+end
 ```
 
 ---
@@ -49,7 +55,11 @@ rails new 🎉
 # The values are different in environments
 
 ```ruby
-# TODO code sample
+def make_it_pretty
+  DEVE_VAL.times { puts "❤️" } if Rails.env.development?
+  TEST_VAL.times { puts "❤️" } if Rails.env.test?
+  PROD_VAL.times { puts "❤️" } if Rails.env.production?
+end
 ```
 
 ---
@@ -57,7 +67,24 @@ rails new 🎉
 # You configure them in dev, test and prod
 
 ```ruby
-# TODO code sample
+# config/environments/development.rb
+Rails.application.configure do
+  config.action_mailer.delivery_method = :letter_opener
+  ...
+
+# config/environments/test.rb
+Rails.application.configure do
+  config.action_mailer.delivery_method = :test
+  ...
+
+# config/environments/production.rb
+Rails.application.configure do
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    user_name: "apikey",
+    password: Rails....credentials.sendgrid[:api_key],
+    ...
 ```
 
 ---
@@ -169,8 +196,7 @@ _you haven't seen this presentation so ..._
 
 # Don't Do That 🚨
 
-> don't create **processes** that can lead to developers committing secrets to
-> GIT
+> don't create **processes** that can lead to developers committing secrets to GIT
 
 ---
 
@@ -308,6 +334,7 @@ API_SECRET='the-real-secret-🔐'
 
 # so what are the alternatives?
 
+* ephemeral environments
 * encrypted secrets
 
 ---
@@ -342,15 +369,16 @@ API_SECRET='the-real-secret-🔐'
 
 # Why should you care?
 
-- Deployed secrets via Kubernetes
-- Production access
-
 ---
 
 # Next
 
 - AnywayConfig and EJson
 - AnywayConfig and Rails Credentials
+- Mozila SOPS demo
+- Kubernetes with secrets-store-csi-driver
+- Kubernetes with external-secrets
+- Demo what happens if someone has your secrets 🥷
 
 ---
 
@@ -363,8 +391,8 @@ API_SECRET='the-real-secret-🔐'
 ![QR to code](images/env-var-qr.png)
 also mentioned
 - rails credentials
-- SOPS
-- EJson
+- Mozilla's SOPS
+- Shopify's EJson
 - Ansible vault
 - AnywayConfig
 - 12 factor
