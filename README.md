@@ -14,6 +14,13 @@ make install
 make slides
 ```
 
+- as presented at ruby AU
+
+[![
+  Thoughts on Environment Variables - Michael Milewski - Ruby Australia
+  ](http://img.youtube.com/vi/Pf-IrWRm-UE/0.jpg
+)](https://youtu.be/Pf-IrWRm-UE)
+
 ## Demo
 
 ### Env Vars
